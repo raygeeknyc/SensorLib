@@ -1,4 +1,5 @@
 /***
+ *
  * This library, demo sketch and docs are available at:
  * http://www.insanegiantrobots.com/arduino/sensorlib.zip
  * @see AnalogSensor.h
