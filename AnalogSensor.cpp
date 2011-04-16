@@ -234,6 +234,14 @@ int analogSensorLastState(analogSensor_t &sensor) {
   return sensor.samples[0];
 }
 
+int analogSensorLastDelta(analogSensor_t &sensor) {
+  return (sensor.sampleCount==1)?0:sensor.samples[1]-sensor.samples[0];
+}
+
+int AnalogSensor::lastDelta() {
+  return analogSensorLastDelta(data);
+}
+
 int AnalogSensor::lastState() {
   return analogSensorLastState(data);
 }

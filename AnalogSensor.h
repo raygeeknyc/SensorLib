@@ -94,6 +94,7 @@ public:
   int currentDelta();
   int currentPercentOfAverage();
   int currentAverageReading();
+  int lastDelta();
   bool isFiring();
   void takeSample();
   int lastState();
