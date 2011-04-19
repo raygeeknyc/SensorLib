@@ -26,8 +26,6 @@
 
 #include <stdint.h>
 
-#define PING_PULSE_MICROS 5
-#define PING_ECHO_MICROS 20
 /**
   Struct to hold all data for an analog sensor
 */
