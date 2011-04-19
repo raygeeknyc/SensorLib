@@ -38,34 +38,6 @@ int analogSensorValue(analogSensor_t &sensor) {
   return analogRead(sensor.id);
 }
 
-int pingSensorValue(analogSensor_t &sensor) {
-  pinMode(sensor.id, OUTPUT);
-  digitalWrite(sensor.id, LOW);
-  delayMicroseconds(PING_PULSE_MICROS);
-  digitalWrite(sensor.id, HIGH);
-  delayMicroseconds(PING_ECHO_MICROS);
-  digitalWrite(sensor.id, LOW);
-  pinMode(sensor.id, INPUT);
-  int echo_duration_in_microseconds = pulseIn(sensor.id, HIGH, 1000000L);
-  // Sounds travels at 74.746 uSecs per inch, divide by 2 to allow for round trip delay
-  return echo_duration_in_microseconds / 74 / 2;
-}
-
-/***
-  If this sensor has reached its sampling interval, take a new value reading using the
-  collection function provided.
-*/
-void SensorSample_(analogSensor_t &sensor, int(*getValueFunction)(analogSensor_t&)) {
-  unsigned long int now = millis();
-  if ((now - sensor.lastSampleAt) >= sensor.sampleInterval) {
-    for (int i=sensor.sampleCount-1; i > 0; i--) {
-      sensor.samples[i] = sensor.samples[i-1];
-    }
-    sensor.lastSampleAt = millis();
-    sensor.samples[0] = getValueFunction(sensor);
-  }
-}
-
 /***
  Setup the analog sensor on the designated pin
 */
@@ -92,6 +64,22 @@ unsigned long int interval) {
 AnalogSensor::AnalogSensor(char* name, int pin, int sample_count, unsigned long int thresholdPct, unsigned long int thresholdDelta, bool fireThresholdDirectionSensitive,
 	unsigned long int interval) {
   initAnalogSensor(data, name, pin, sample_count, thresholdPct, thresholdDelta, fireThresholdDirectionSensitive, interval);
+}
+
+/***
+  If this sensor has reached its sampling interval, take a new value reading usi
+ng the
+  collection function provided.
+*/
+void SensorSample_(analogSensor_t &sensor, int(*getValueFunction)(analogSensor_t
+&)) {
+  unsigned long int now = millis();
+  if ((now - sensor.lastSampleAt) >= sensor.sampleInterval) {
+    for (int i=sensor.sampleCount-1; i > 0; i--) {
+      sensor.samples[i] = sensor.samples[i-1];
+    }
+    sensor.lastSampleAt = millis();
+    sensor.samples[0] = getValueFunction(sensor);  }
 }
 
 void takeAnalogSensorSample(analogSensor_t &sensor) {
