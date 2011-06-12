@@ -34,8 +34,8 @@ extern "C" {
   //void digitalWrite(int, uint8_t);
 }
 
-extern "C" { void SensorSample_(analogSensor_t &sensor, int(*getValueFunction)(analogSensor_t
-&)); }
+void SensorSample_(analogSensor_t &sensor,
+                     int(*getValueFunction)(analogSensor_t&));
 
 int pingSensorValue(analogSensor_t &sensor) {
   pinMode(sensor.id, OUTPUT);
@@ -52,4 +52,8 @@ int pingSensorValue(analogSensor_t &sensor) {
 
 void takePingSensorSample(analogSensor_t &sensor) {
   SensorSample_(sensor, pingSensorValue);
+}
+
+void PingSensor::takeSample() {
+  takePingSensorSample(data);
 }

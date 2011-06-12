@@ -28,8 +28,8 @@
 
 #include <AnalogSensor.h>
 
-#define PING_PULSE_MICROS 5
-#define PING_ECHO_MICROS 20
+#define PING_PULSE_MICROS 2
+#define PING_ECHO_MICROS 5
 
 /**
   Class to represent a Single pin PING Sensor that fires when its current
@@ -48,5 +48,6 @@ PingSensor(char* name, int d_pin, int sample_count, unsigned long int thresholdP
   : AnalogSensor(name, d_pin, sample_count, thresholdPct, thresholdDelta, fireThresholdDirectionSensitive,
     interval)
     {};
+  void takeSample();
 };
 #endif
