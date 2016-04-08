@@ -11,7 +11,10 @@
 
 
 #include <RgbLed.h>
-#include <SensorLib.h>
+#include <AnalogSensor.h>
+#include <DigitalSensor.h>
+#include <PingSensor.h>
+
 
 // Print sensor data to Serial?
 #define DEBUG true

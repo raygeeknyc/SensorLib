@@ -14,6 +14,7 @@
  */
 
 #include "DigitalSensor.h"
+#include <Arduino.h>
 
 /******************************************************************************
  * Wiring/Arduino Includes
@@ -23,11 +24,6 @@ extern "C" {
   #include <inttypes.h>
   #include <stdlib.h>
   #include <string.h>
-  #include "WConstants.h"
-
-  // Wiring Core Includes
-  #undef abs
-  #include "WConstants.h"
 
   // Wiring Core Prototypes
   //void pinMode(uint8_t, uint8_t);
